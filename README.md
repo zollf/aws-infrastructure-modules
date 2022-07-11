@@ -7,7 +7,7 @@ My aws infrastructure module.
 | VPC                   | `vpc-<region>-<name>`               |
 | ECS                   | `ecs-<region>-<name>`               |
 | AUTO-SCALE GROUP      | `asg-<resource>-<name>`             |   
-| SECURITY GROUP        | `sg-<resource>-<name>`              | 
+| SECURITY GROUP        | `seg-<resource>-<name>`             | 
 | LAUNCH CONFIG         | `lc-<resource>-<name>`              |
 | KEY PAIR              | `key-<name>`                        |
 | IAM ROLE              | `iamr-<resource>-<name>`            |

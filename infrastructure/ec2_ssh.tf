@@ -10,14 +10,14 @@ data "aws_ami" "amzn2" {
 }
 
 resource "aws_security_group" "vpc_ssh_access" {
-  name        = "sg-vpc-ssh-${var.name}"
+  name        = "seg-vpc-ssh-${var.name}"
   description = "SSH access into the VPC"
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -31,7 +31,7 @@ resource "aws_security_group" "vpc_ssh_access" {
 
 resource "aws_instance" "vpc_ssh_access" {
   ami                    = data.aws_ami.amzn2.id
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.vpc_ssh_access.id]
 
   subnet_id = module.vpc.public_subnets[0]
@@ -39,7 +39,8 @@ resource "aws_instance" "vpc_ssh_access" {
   key_name = module.key_pair.key_pair_key_name
 
   tags = {
-    Name = "${var.name}"
+    Name      = "ec2-vpc-ssh-${var.name}"
+    Infra     = "${var.name}"
     Terraform = "True"
   }
 }

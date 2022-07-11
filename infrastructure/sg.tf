@@ -1,5 +1,5 @@
 resource "aws_security_group" "lb_security_group" {
-  name        = "sg-lb-${var.name}"
+  name        = "seg-lb-${var.name}"
   description = "Allow http and https communication"
   vpc_id      = module.vpc.vpc_id
 
@@ -27,7 +27,7 @@ resource "aws_security_group" "lb_security_group" {
 
 // ECS Service will need to reference this target group
 resource "aws_security_group" "service_security_group" {
-  name        = "sg-service-${var.name}"
+  name        = "seg-service-${var.name}"
   description = "Allow communication within service"
   vpc_id      = module.vpc.vpc_id
 
@@ -48,7 +48,7 @@ resource "aws_security_group" "service_security_group" {
 }
 
 resource "aws_security_group" "mysql" {
-  name        = "sg-rds-${var.name}"
+  name        = "seg-rds-${var.name}"
   description = "Allow communication to database"
   vpc_id      = module.vpc.vpc_id
 

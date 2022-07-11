@@ -19,7 +19,7 @@ module "vpc" {
   external_nat_ip_ids = aws_eip.nat.*.id
 
   tags = {
-    Name      = "${var.name}"
+    Infra     = "${var.name}"
     Terraform = "True"
   }
 }

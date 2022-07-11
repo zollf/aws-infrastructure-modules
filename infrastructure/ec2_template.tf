@@ -10,14 +10,14 @@ data "template_file" "ecs_user_data" {
 }
 
 resource "aws_launch_configuration" "ecs_launch_configuration" {
-  name_prefix            = "lc-ecs-${var.name}-"
-  image_id               = data.aws_ssm_parameter.ecs_ami.value
-  instance_type          = var.ec2_instance_size
-  iam_instance_profile   = aws_iam_instance_profile.ecs_instance_profile.name
-  security_groups        = [aws_security_group.ecs.id]
-  key_name               = module.key_pair.key_pair_key_name
-  ebs_optimized          = true
-  user_data              = base64encode(data.template_file.ecs_user_data.rendered)
+  name_prefix          = "lc-ecs-${var.name}-"
+  image_id             = data.aws_ssm_parameter.ecs_ami.value
+  instance_type        = var.ec2_instance_size
+  iam_instance_profile = aws_iam_instance_profile.ecs_instance_profile.name
+  security_groups      = [aws_security_group.ecs.id]
+  key_name             = module.key_pair.key_pair_key_name
+  ebs_optimized        = true
+  user_data            = base64encode(data.template_file.ecs_user_data.rendered)
 
   root_block_device {
     volume_type           = "gp2"

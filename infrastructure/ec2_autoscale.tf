@@ -1,8 +1,8 @@
 resource "aws_autoscaling_group" "ecs_autoscaling_group" {
   name                 = "asg-ecs-${var.name}"
-  max_size             = 2
-  min_size             = 1
-  desired_capacity     = 1
+  max_size             = var.max_autoscale_size
+  min_size             = var.min_autoscale_size
+  desired_capacity     = var.desired_autoscale_size
   vpc_zone_identifier  = module.vpc.private_subnets
   health_check_type    = "ELB"
   launch_configuration = aws_launch_configuration.ecs_launch_configuration.name
@@ -21,7 +21,7 @@ resource "aws_autoscaling_group" "ecs_autoscaling_group" {
 }
 
 resource "aws_security_group" "ecs" {
-  name        = "sg-ecs-${var.name}"
+  name        = "seg-ecs-${var.name}"
   description = "Security group for ecs ${var.name}"
   vpc_id      = module.vpc.vpc_id
 
@@ -51,7 +51,7 @@ resource "aws_security_group" "ecs" {
   }
 
   tags = {
-    Name      = "${var.name}"
+    Infra     = "${var.name}"
     Terraform = "True"
   }
 }
