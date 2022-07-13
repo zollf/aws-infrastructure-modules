@@ -25,6 +25,7 @@ My aws infrastructure modules.
 | EC2                   | `ec2-<resource>-<name>`             |
 | SSM                   | `ssm-<infra>-<resource>-<name>`     |
 | ECR                   | `ecr-<infra>-<resource>-<name>`     |
+| CLOUDWATCH            | `cw-<infra>-<name>`                 |
 
 ## Infrastructure Module
 
@@ -59,5 +60,50 @@ Creates:
 
 ### Examples:
 ```terraform
-# TODO
+module "dylank" {
+  source = "../../aws-infrastructure-modules/ecs_service"
+  name = "dylank"
+  region = "ap-southeast-2"
+  infrastructure_name = "core"
+  s3_remote_state_bucket = "s3-tf-remote-state"
+  s3_remote_state_key = "infrastructure/infra.tfstate"
+  desired_count = 0
+  url = "dylank.io"
+  zone = "dylank.io."
+  containers = [
+    {
+      name: "node",
+      port: 3000,
+      cpu: 64,
+      memory: 128,
+      secrets: [],
+      environment_variables: [],
+      entry_point: false,
+      depends: []
+    },
+    {
+      name: "nginx",
+      port: 80,
+      cpu: 96,
+      memory: 128,
+      secrets: [],
+      environment_variables: [],
+      entry_point: true,
+      depends: ["node", "elixir"]
+    },    
+    {
+      name: "elixir",
+      port: 8080,
+      cpu: 96,
+      memory: 256,
+      secrets: [],
+      environment_variables: [],
+      entry_point: false,
+      depends: []
+    }
+  ]
+
+  secrets = []
+  environment_variables = []
+}
 ```

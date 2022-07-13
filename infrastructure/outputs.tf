@@ -18,6 +18,12 @@ output "lb_target_group_arn" {
   value       = aws_lb_target_group.target_group.arn
 }
 
+output "lb_arn" {
+  description = "Load balancer arn."
+  value       = aws_alb.application_load_balancer.arn
+}
+
 output "execution_role_arn" {
+  description = "Execution role arn."
   value       = aws_iam_role.ecs_task_execution_role.arn
 }

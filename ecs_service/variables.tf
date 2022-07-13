@@ -18,6 +18,23 @@ variable "s3_remote_state_bucket" {
   type        = string
 }
 
+variable "s3_remote_state_key" {
+  description = "S3 remote state bucket key where infrastructure remote state is stored."
+  type        = string
+}
+
+variable "desired_count" {
+  type        = number
+}
+
+variable "url" {
+  type = string
+}
+
+variable "zone" {
+  type = string
+}
+
 variable "containers" {
   description = "Containers for this ecs ervice."
   type = list(object({
@@ -28,6 +45,7 @@ variable "containers" {
     secrets               = list(string)
     environment_variables = list(string)
     entry_point           = bool
+    depends               = list(string)
   }))
 }
 
