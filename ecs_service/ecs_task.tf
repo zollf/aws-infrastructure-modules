@@ -14,8 +14,14 @@ resource "aws_ecs_task_definition" "task_definition" {
             "protocol": "tcp"
           }
         ],
-        "environment": [],
-        "secrets": [],
+        "environment": [for env in var.environment_variables : {
+          "name": "${env.name}",
+          "value": "${env.value}"
+        } if contains(container.environment_variables, env.name)],
+        "secrets": [for secret in container.secrets : {
+          "name": "${secret}",
+          "valueFrom": "secret-${var.infrastructure_name}-${var.name}-${secret}"
+        }],
         "logConfiguration": {
           "logDriver": "awslogs",
           "options": {

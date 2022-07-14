@@ -1,6 +1,6 @@
 resource "aws_ssm_parameter" "secrets" {
-  for_each  = toset(var.secrets)
-  name      = "ssm-${var.infrastructure_name}-${var.name}-${each.key}"
+  for_each  = toset(distinct(flatten([for container in var.containers : container.secrets])))
+  name      = "secret-${var.infrastructure_name}-${var.name}-${each.key}"
   type      = "SecureString"
   value     = "default"
   overwrite = true

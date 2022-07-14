@@ -49,13 +49,6 @@ variable "containers" {
   }))
 }
 
-variable "secrets" {
-  description = "Secrets to be accessed by containers. These have to be manual set in SSM."
-  type = list(object({
-    name = string
-  }))
-}
-
 variable "environment_variables" {
   description = "Envrionment variables to be accessed by containers."
   type = list(object({

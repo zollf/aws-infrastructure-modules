@@ -23,7 +23,7 @@ My aws infrastructure modules.
 | LB TARGET GROUP       | `lb-tg-<name>`                      |
 | RDS                   | `rds-<engine>-<name>`               |
 | EC2                   | `ec2-<resource>-<name>`             |
-| SSM                   | `ssm-<infra>-<resource>-<name>`     |
+| SSM                   | `secret-<infra>-<resource>-<name>`  |
 | ECR                   | `ecr-<infra>-<resource>-<name>`     |
 | CLOUDWATCH            | `cw-<infra>-<name>`                 |
 
