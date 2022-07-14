@@ -42,7 +42,7 @@ resource "aws_ecs_task_definition" "task_definition" {
   network_mode             = "awsvpc"
   memory                   = sum([for container in var.containers : container.memory])
   cpu                      = sum([for container in var.containers : container.cpu])
-  execution_role_arn       = data.terraform_remote_state.infra.outputs.execution_role_arn
+  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
 
   depends_on = [
     aws_ecr_repository.repositories,

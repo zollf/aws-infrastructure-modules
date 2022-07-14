@@ -22,8 +22,3 @@ output "lb_arn" {
   description = "Load balancer arn."
   value       = aws_alb.application_load_balancer.arn
 }
-
-output "execution_role_arn" {
-  description = "Execution role arn."
-  value       = aws_iam_role.ecs_task_execution_role.arn
-}
