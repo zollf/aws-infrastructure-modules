@@ -7,7 +7,7 @@ resource "aws_ecs_service" "ecs_service" {
   cluster                            = data.terraform_remote_state.infra.outputs.ecs_arn
   task_definition                    = aws_ecs_task_definition.task_definition.arn
   launch_type                        = "EC2"
-  desired_count                      = 1
+  desired_count                      = var.desired_count
   health_check_grace_period_seconds  = 120
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
